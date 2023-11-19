@@ -6,6 +6,12 @@ const Todo = () => {
     const [todos , setTodos] = useState ([]);
 
 
+
+
+    
+    
+
+
     function crearToDoList() {
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -26,14 +32,17 @@ const Todo = () => {
     };
 
     function traerToDoList() {
-        
-        let requestOptions2 = {
+
+        var raw = "";
+
+        var requestOptions = {
             method: 'GET',
+            body: raw,
             redirect: 'follow'
         };
 
-        fetch("https://playground.4geeks.com/apis/fake/todos/user/satan", requestOptions2)
-            .then(response => response.json())
+        fetch("https://playground.4geeks.com/apis/fake/todos/user/satan", requestOptions)
+            .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     };
@@ -52,6 +61,11 @@ const Todo = () => {
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     };
+
+
+
+
+
 
 
 
