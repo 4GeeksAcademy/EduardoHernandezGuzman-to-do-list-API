@@ -5,58 +5,6 @@ const Todo = () => {
     const [inputValue , setInputValue] = useState ("");
     const [todos , setTodos] = useState ([]);
 
-
-    function crearToDoList() {
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        let raw = JSON.stringify([]);
-
-        let requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("https://playground.4geeks.com/apis/fake/todos/user/satan5", requestOptions)
-            .then(response => response.json())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    };
-
-    function traerToDoList() {
-        
-        let requestOptions2 = {
-            method: 'GET',
-            redirect: 'follow'
-        };
-
-        fetch("https://playground.4geeks.com/apis/fake/todos/user/satan", requestOptions2)
-            .then(response => response.json())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    };
-
-    function actualizarToDoList() {
-        var raw = "";
-
-        var requestOptions = {
-            method: 'PUT',
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("https://playground.4geeks.com/apis/fake/todos/user/satan", requestOptions)
-            .then(response => response.json())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    };
-
-
-
-
-
     return (
         <>
             <div className="container col-4 todofondo">
@@ -79,11 +27,7 @@ const Todo = () => {
                     
                 </ul>
                 <div className="tareas" >{todos.length} tareas</div>
-                <button onClick={crearToDoList} >Crea TO DO LIST</button>
-                <button onClick={traerToDoList} >Traer tareas</button>
-                <button onClick={actualizarToDoList} >Actualizar tareas</button>
             </div>
-           
         </>
         
     );
