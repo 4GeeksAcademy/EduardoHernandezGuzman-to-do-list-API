@@ -98,6 +98,7 @@ const Todo = () => {
                 <ul>
                     <li>
                         <input
+                            className="cajas"
                             value={inputValue}
                             onChange={handleInput}
                             onKeyDown={agregar}
@@ -123,7 +124,10 @@ const Todo = () => {
                     ))}
                 </ul>
                 <div className="tareas">{todos.length} tareas</div>
-                <button onClick={borrarTodasLasTareas}>Borra todo</button>
+                
+            </div>
+            <div className="container col-4">
+            <button onClick={borrarTodasLasTareas}>Borra todo</button>
             </div>
         </>
     );

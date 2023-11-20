@@ -44,3 +44,49 @@ svg {
     color: #ff5f5f;
     margin-top: 9px;
 }
+
+button {
+    margin-top: 40px;
+    --bg: #e74c3c;
+    --text-color: #fff;
+    position: relative;
+    width: 150px;
+    border: none;
+    background: var(--bg);
+    color: var(--text-color);
+    padding: 1em;
+    transition: 0.2s;
+    border-radius: 5px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+    box-shadow: #c0392b 0px 7px 2px, #000 0px 8px 5px;
+  }
+  
+  button:hover {
+    opacity: 1;
+  }
+  
+  button:active {
+    top: 4px;
+    box-shadow: #c0392b 0px 3px 2px,#000 0px 3px 5px;
+  }
+
+  .cajas {
+    border: 2px solid transparent;
+    width: 15em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+  }
+  
+  .cajas:hover,
+  .cajas:focus {
+    border: 2px solid #ec624a;
+    box-shadow: 0px 0px 0px 7px rgba(236, 74, 74, 0.1);
+    background-color: white;
+  }
+  
