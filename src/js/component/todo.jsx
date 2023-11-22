@@ -5,90 +5,87 @@ const Todo = () => {
     const [todos, setTodos] = useState([]);
 
 
-
-
-    async function creacionUsuario() {
-        try {
-            let response = await fetch('https://playground.4geeks.com/apis/fake/todos/user/satan', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify([]),
-            });
-            let data = await response.json();
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
+//Creamos el usuario (satan) (usamos POST)
+    function creacionUsuario() {
+        fetch('https://playground.4geeks.com/apis/fake/todos/user/satan', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify([])
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
     }
 
-    async function obtencionDeTareas() {
-        try {
-            let response = await fetch('https://playground.4geeks.com/apis/fake/todos/user/satan');
-            let data = await response.json();
-            console.log(data);
-            setTodos(data);
-        } catch (error) {
-            console.log(error);
-        }
+//Traemos las tareas desde la API (GET)
+    function obtencionDeTareas() {
+        fetch('https://playground.4geeks.com/apis/fake/todos/user/satan')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setTodos(data);
+            })
     }
 
-    async function actualizacion(todos) {
-        try {
-            await fetch('https://playground.4geeks.com/apis/fake/todos/user/satan', {
-                method: 'PUT',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(todos),
-            });
-        } catch (error) {
-            console.log(error);
-        }
+//Actualizamos las tareas (PUT)
+    function actualizacion(todos) {
+        fetch('https://playground.4geeks.com/apis/fake/todos/user/satan', {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(todos)
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
     }
 
-    async function borrarTodasLasTareas() {
-        try {
-            await fetch('https://playground.4geeks.com/apis/fake/todos/user/satan', {
-                method: 'DELETE',
-                headers: { "Content-Type": "application/json" },
-            });
-            setTodos([]);
-        } catch (error) {
-            console.log(error);
-        }
+//Borramos todas las tareas (DELETE)    
+    function borrarTodasLasTareas() {
+        fetch('https://playground.4geeks.com/apis/fake/todos/user/satan', {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setTodos([]);
+            })
     }
 
+//Queremos que la creacion de usuario y la obtención de tareas se hagan cuando haya un cambio 
     useEffect(() => {
         creacionUsuario();
         obtencionDeTareas();
     }, []);
 
+//Esta función maneja el evento de cambio de entrada para el campo de entrada    
     function handleInput(event) {
         setInputValue(event.target.value);
     }
 
+//Esta función maneja el evento de pulsación de tecla Enter
     function agregar(event) {
         if (event.key === "Enter" && inputValue !== "") {
-            const newTask = {
+            const nuevaTarea = {
                 label: inputValue,
                 done: false
             };
-            setTodos([...todos, newTask]);
-            actualizacion([...todos, newTask]);
+            setTodos([...todos, nuevaTarea]);
+            actualizacion([...todos, nuevaTarea]);
             setInputValue("");
         }
     }
 
+//Esta función se utiliza para suprimir una tarea del array de estado "todos"
     function suprimir(index) {
         const newList = todos.filter((item, i) => index !== i);
         actualizacion(newList);
         setTodos(newList);
     }
-
-
-
-
-
 
 
     return (
@@ -122,13 +119,13 @@ const Todo = () => {
                             </svg>{" "}
                         </li>
                     ))}
+                    <button onClick={borrarTodasLasTareas}>Borrar todo</button>
                 </ul>
-                <div className="tareas">{todos.length} tareas</div>
                 
+                <div className="tareas">Tienes <b>{todos.length}</b> tareas</div>
+
             </div>
-            <div className="container col-4">
-            <button onClick={borrarTodasLasTareas}>Borra todo</button>
-            </div>
+           
         </>
     );
 };
